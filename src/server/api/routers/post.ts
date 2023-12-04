@@ -1,6 +1,12 @@
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 
+interface BertResponse {
+  text: string;
+  sentiment: string;
+  confidence: number;
+}
+
 
 export const postRouter = createTRPCRouter({
   create: publicProcedure
@@ -11,13 +17,24 @@ export const postRouter = createTRPCRouter({
     )
     .mutation(async ({ ctx, input }) => {
       try {
-        const sentimentScore = Math.random() * 4;
+        const url = "http://127.0.0.1:8000/process_text/";
+
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: `text=${encodeURIComponent(input.sentence)}`,
+        });
+
+        const data = await response.json() as BertResponse;
 
         // Your existing logic
         const createdPost = await ctx.db.post.create({
           data: {
-            sentence: input.sentence,
-            sentimentScore: sentimentScore,
+            sentence: data.text,
+            sentiment: data.sentiment,
+            score: data.confidence,
           },
         });
 

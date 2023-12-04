@@ -49,19 +49,19 @@ export function PostComponent() {
   });
 
   return (
-    <>
+    <div className="w-full flex flex-row gap-2">
       <form
         onSubmit={(e) => {
           e.preventDefault();
           createPost.mutate({ sentence: sentence });
         }}
-        className="flex flex-row flex-wrap justify-center gap-2"
+        className="flex w-full justify-center gap-2"
       >
         <input
           type="text"
           value={sentence}
           onChange={(e) => setSentence(e.target.value)}
-          className={`w-2/3 rounded-lg border p-2 text-gray-700 ${
+          className={`flex flex-grow rounded-lg border p-2 text-gray-700 ${
             error ? "border-red-500" : ""
           }`}
           placeholder="I happy my dog died."
@@ -81,6 +81,27 @@ export function PostComponent() {
         </button>
         {error && <p className="w-full text-red-500">{error}</p>}
       </form>
-    </>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          deleteAllPosts.mutate();
+        }}
+        className="flex flex-row justify-center gap-2"
+      >
+        <button
+          type="submit"
+          className="w-fit whitespace-nowrap self-center rounded-xl bg-red-500 px-10 py-2 text-center font-semibold text-white transition hover:bg-red-500/80"
+          disabled={deleteAllPosts.isLoading}
+        >
+          {deleteAllPosts.isLoading ? (
+            <>
+              <AiOutlineLoading className="mr-2 inline-block animate-spin" />
+            </>
+          ) : (
+            "Delete All"
+          )}
+        </button>
+      </form>
+    </div>
   );
 }

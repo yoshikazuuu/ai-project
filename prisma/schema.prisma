@@ -11,11 +11,12 @@ datasource db {
 }
 
 model Post {
-    id             Int      @id @default(autoincrement())
-    sentence       String
-    sentimentScore Float
-    createdAt      DateTime @default(now())
-    updatedAt      DateTime @updatedAt
+    id        Int      @id @default(autoincrement())
+    sentence  String
+    sentiment String
+    score     Int
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 
     @@index([sentence])
 }
