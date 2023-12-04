@@ -1,65 +1,94 @@
-import Link from "next/link";
-
-import { CreatePost } from "@/app/_components/create-post";
 import { api } from "@/trpc/server";
+import { PostComponent } from "./_components/post-component";
 
-export default async function Home() {
-  const hello = await api.post.hello.query({ text: "from tRPC" });
+import { Post } from "@prisma/client";
 
+const sentimentMap = {
+  0: { sentiment: "sadness", color: "#000000" },
+  1: { sentiment: "anger", color: "#ff0000" },
+  2: { sentiment: "love", color: "#ff8a8a" },
+  3: { sentiment: "fear", color: "#363636" },
+  4: { sentiment: "happy", color: "#f6ff00" },
+} as const;
+
+type SentimentKey = keyof typeof sentimentMap;
+
+export default async function Twitter() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-        <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-          Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-        </h1>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-            href="https://create.t3.gg/en/usage/first-steps"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">First Steps →</h3>
-            <div className="text-lg">
-              Just the basics - Everything you need to know to set up your
-              database and authentication.
-            </div>
-          </Link>
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-            href="https://create.t3.gg/en/introduction"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">Documentation →</h3>
-            <div className="text-lg">
-              Learn more about Create T3 App, the libraries it uses, and how to
-              deploy it.
-            </div>
-          </Link>
-        </div>
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-2xl text-white">
-            {hello ? hello.greeting : "Loading tRPC query..."}
-          </p>
-        </div>
-
-        <CrudShowcase />
+    <div className="layout flex flex-col justify-center gap-4 py-10">
+      <div className="text-center text-2xl font-bold">
+        Sentence Sentiment Checker
       </div>
-    </main>
+
+      <PostComponent />
+      <AllData />
+    </div>
   );
 }
 
-async function CrudShowcase() {
-  const latestPost = await api.post.getLatest.query();
+async function AllData() {
+  const allPosts = await api.post.getAll.query();
+
+  const sumValue = allPosts.reduce((acc, post) => {
+    return acc + post.sentimentScore;
+  }, 0);
+
+  const averageValue = sumValue / allPosts.length;
 
   return (
-    <div className="w-full max-w-xs">
-      {latestPost ? (
-        <p className="truncate">Your most recent post: {latestPost.name}</p>
+    <div className="flex w-full flex-col gap-2">
+      <div className="flex items-center justify-center text-xl">
+        <p className="font-bold">
+          Average Sentiment is{" "}
+          {sentimentMap[Math.round(averageValue) as SentimentKey].sentiment}{" "}
+          with confidence of{" "}
+          {(
+            100 -
+            Math.abs(averageValue - Math.round(averageValue)) / 0.005
+          ).toFixed(2)}
+          %
+        </p>
+      </div>
+      {allPosts ? (
+        allPosts.map((post) => TweetCard({ post }))
       ) : (
         <p>You have no posts yet.</p>
       )}
+    </div>
+  );
+}
 
-      <CreatePost />
+function TweetCard({ post }: { post: Post }) {
+  const sentence = post.sentence as string;
+  const sentiment =
+    sentimentMap[Math.round(post.sentimentScore) as SentimentKey];
+
+  const score = (
+    100 -
+    Math.abs(post.sentimentScore - Math.round(post.sentimentScore)) / 0.005
+  ).toFixed(2);
+
+  return (
+    <div
+      key={post.id}
+      className="flex w-full flex-col gap-4 rounded-xl border p-4"
+    >
+      <p className="">{sentence}</p>
+      <div className="flex items-center justify-between gap-2">
+        <p
+          className="w-24 rounded-md border px-2 py-1 text-center text-sm font-light"
+          style={{ backgroundColor: `${sentiment.color}80` }}
+        >
+          {sentiment.sentiment}
+        </p>
+        <p
+          className="w-fit rounded-md border px-2 py-1 text-center text-sm font-light"
+          style={{ backgroundColor: `hsla(${score}, 100%, 50%, 0.5)` }}
+        >
+          <span className="font-bold">Confidence: </span>
+          {score}%
+        </p>
+      </div>
     </div>
   );
 }

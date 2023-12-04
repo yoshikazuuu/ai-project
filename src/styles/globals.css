@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border border-gray-400;
+  }
+}
+@layer components {
+  .layout {
+    max-width: 42rem;
+    @apply mx-auto w-11/12;
+  }
+}
+
+@layer utilities {
+  body {
+    @apply bg-gray-900 text-gray-300;
+  }
+}
