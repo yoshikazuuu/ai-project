@@ -1,11 +1,17 @@
-import "@/styles/globals.css";
-
-import { Inter } from "next/font/google";
+import { Inter as FontSans } from "next/font/google";
 import { cookies } from "next/headers";
 
-import { TRPCReactProvider } from "@/trpc/react";
+import "@/styles/globals.css";
 
-const inter = Inter({
+import { cn } from "@/lib/utils";
+
+import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
+
+import { TRPCReactProvider } from "@/trpc/react";
+import { SiteHeader } from "@/components/main-navbar";
+
+export const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 });
@@ -23,10 +29,24 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable}`}>
-        <TRPCReactProvider cookies={cookies().toString()}>
-          {children}
-        </TRPCReactProvider>
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          fontSans.variable,
+        )}
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <TRPCReactProvider cookies={cookies().toString()}>
+            <SiteHeader />
+            <div className="layout">{children}</div>
+            <Toaster />
+          </TRPCReactProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

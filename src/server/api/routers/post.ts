@@ -1,4 +1,5 @@
 import { z } from "zod";
+
 import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 
 interface BertResponse {
@@ -7,12 +8,12 @@ interface BertResponse {
   confidence: number;
 }
 
-
 export const postRouter = createTRPCRouter({
   create: publicProcedure
     .input(
       z.object({
         sentence: z.string().min(1),
+        trained: z.boolean(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -20,21 +21,22 @@ export const postRouter = createTRPCRouter({
         const url = "http://127.0.0.1:8000/process_text/";
 
         const response = await fetch(url, {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            "Content-Type": "application/x-www-form-urlencoded",
           },
-          body: `text=${encodeURIComponent(input.sentence)}`,
+          body: `text=${encodeURIComponent(input.sentence)}&trained=${encodeURIComponent(input.trained)}`,
         });
 
-        const data = await response.json() as BertResponse;
+        const data = (await response.json()) as BertResponse;
 
         // Your existing logic
         const createdPost = await ctx.db.post.create({
           data: {
             sentence: data.text,
             sentiment: data.sentiment,
-            score: data.confidence,
+            confidence: data.confidence,
+            trained: input.trained,
           },
         });
 
@@ -57,7 +59,7 @@ export const postRouter = createTRPCRouter({
     });
   }),
 
-  clear: publicProcedure.mutation(({ ctx }) => {
+  delete: publicProcedure.mutation(({ ctx }) => {
     return ctx.db.post.deleteMany();
   }),
 });
