@@ -1,18 +1,11 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { FaArrowDown } from "react-icons/fa";
-
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import Accent from "@/components/accent";
-import Image from "next/image";
 import { HiSparkles } from "react-icons/hi2";
 
 export default function Home() {
   return (
     <>
-      <div className="absolute -z-10 -mt-[56px] h-screen w-full bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-cyan-600/50 via-red-50/0 transition-colors" />
+      <div className="absolute -z-10 -mt-[56px] h-screen w-full bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-yellow-400/30 via-red-50/0 transition-colors dark:from-cyan-600/50  dark:via-red-50/0" />
       <div className="layout">
         <section id="intro">
           <div className="-mt-[56px] flex h-screen w-full flex-col items-center justify-center gap-4 align-middle">

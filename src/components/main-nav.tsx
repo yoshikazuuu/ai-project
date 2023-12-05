@@ -59,15 +59,6 @@ export function MainNav() {
         >
           Others
         </Link>
-        <Link
-          href="https://github.com/yoshikazuuu/ai-project"
-          className={cn(
-            "hidden text-foreground/60 transition-colors hover:text-foreground/80 lg:block",
-          )}
-          target="_blank"
-        >
-          GitHub
-        </Link>
       </nav>
     </div>
   );

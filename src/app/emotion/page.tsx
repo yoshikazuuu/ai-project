@@ -16,13 +16,16 @@ const sentimentMap = {
 
 export default async function Twitter() {
   return (
-    <div className="layout flex flex-col justify-center gap-4 py-10">
-      <div className="text-center text-2xl font-bold">
-        Sentence Emotion Checker
+    <>
+      <div className="absolute -z-10 -mt-[56px] h-screen w-full bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-yellow-400/30 via-red-50/0 transition-colors dark:from-cyan-600/50 dark:via-red-50/0" />
+      <div className="layout flex flex-col justify-center gap-4 py-10">
+        <div className="text-center text-2xl font-bold">
+          Sentence Emotion Checker
+        </div>
+        <SubmitForm />
+        <AllData />
       </div>
-      <SubmitForm />
-      <AllData />
-    </div>
+    </>
   );
 }
 
@@ -50,7 +53,7 @@ function TweetCard({ post }: { post: Post }) {
   return (
     <div
       key={post.id}
-      className="flex w-full flex-col gap-4 rounded-md border p-4"
+      className="flex w-full flex-col gap-4 rounded-md border bg-slate-100 p-4 shadow-md dark:bg-slate-900"
     >
       <p>{sentence}</p>
       <div className="flex items-center justify-between gap-2">

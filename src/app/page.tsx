@@ -10,9 +10,10 @@ import Image from "next/image";
 import { HiSparkles } from "react-icons/hi2";
 
 export default function Home() {
+  const [egg, setEgg] = useState(false);
   return (
     <>
-      <div className="absolute -z-10 -mt-[56px] h-screen w-full bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-cyan-600/50 via-red-50/0 transition-colors" />
+      <div className="absolute -z-10 -mt-[56px] h-screen w-full bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-yellow-400/30 via-red-50/0 transition-colors dark:from-cyan-600/30 dark:via-red-50/0" />
       <div className="layout">
         <section id="intro">
           <div className="-mt-[56px] flex h-screen w-full flex-col items-center justify-center gap-4 align-middle">
@@ -203,6 +204,30 @@ export default function Home() {
             </Link>
           </div>
         </section>
+
+        <footer className="flex h-fit flex-col items-center justify-center py-5 align-middle">
+          <div className="flex gap-2 text-muted-foreground">
+            Made with 💖 by{" "}
+            <span
+              onClick={() => setEgg(!egg)}
+              className="-ml-1 cursor-pointer rounded-md px-1 py-[0.5] text-primary hover:bg-primary/20"
+            >
+              binus/ai.
+            </span>
+          </div>
+          {egg && (
+            <div className="my-5">
+              <Link href="https://youtu.be/JTOM6fuXptg" target="_blank">
+                <Image
+                  src="/mijuki.webp"
+                  alt="binus/ai"
+                  width={100}
+                  height={100}
+                />
+              </Link>
+            </div>
+          )}
+        </footer>
       </div>
     </>
   );
