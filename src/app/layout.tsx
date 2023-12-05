@@ -5,11 +5,11 @@ import "@/styles/globals.css";
 
 import { cn } from "@/lib/utils";
 
+import { SiteHeader } from "@/components/main-navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 
 import { TRPCReactProvider } from "@/trpc/react";
-import { SiteHeader } from "@/components/main-navbar";
 
 export const fontSans = FontSans({
   subsets: ["latin"],

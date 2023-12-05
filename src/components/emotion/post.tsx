@@ -21,8 +21,8 @@ import { Switch } from "@/components/ui/switch";
 
 import { api } from "@/trpc/react";
 
-import { toast } from "../ui/use-toast";
 import { DeleteDialog } from "./delete";
+import { toast } from "../ui/use-toast";
 
 const formSchema = z.object({
   sentence: z.string().min(1, { message: "Sentence is required" }),

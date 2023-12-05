@@ -1,11 +1,11 @@
 "use client";
 
-import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import * as React from "react";
+import { HiSparkles } from "react-icons/hi2";
 
 import { cn } from "@/lib/utils";
-import { HiSparkles } from "react-icons/hi2";
 
 export function MainNav() {
   const pathname = usePathname();

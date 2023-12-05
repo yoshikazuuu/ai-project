@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { ThemeProvider } from "./theme-provider";
-import { ModeToggle } from "./ui/mode-toggle";
 import { SiGithub } from "react-icons/si";
-import { Button } from "./ui/button";
+
 import { MainNav } from "./main-nav";
+import { Button } from "./ui/button";
+import { ModeToggle } from "./ui/mode-toggle";
 
 export function SiteHeader() {
   return (

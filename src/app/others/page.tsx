@@ -4,7 +4,7 @@ import MemberCard from "@/components/member-card";
 
 const members = [
   {
-    avatarSrc: "/jerrya.webp",
+    avatarSrc: "/jerry.webp",
     avatarFallback: "J",
     name: "Stanislaus Kanaya Jerry Febriano",
     description: "2602187664 - stanislaus.febriano@binus.ac.id",

@@ -1,13 +1,13 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { FaArrowDown } from "react-icons/fa";
-
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import Accent from "@/components/accent";
 import Image from "next/image";
+import Link from "next/link";
+import {useState } from "react";
+import { FaArrowDown } from "react-icons/fa";
 import { HiSparkles } from "react-icons/hi2";
+
+import Accent from "@/components/accent";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const [egg, setEgg] = useState(false);

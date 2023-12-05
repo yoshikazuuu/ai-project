@@ -1,8 +1,6 @@
 import { type Post } from "@prisma/client";
 
-import { DeleteDialog } from "@/components/emotion/delete";
 import { SubmitForm } from "@/components/emotion/post";
-import { ModeToggle } from "@/components/ui/mode-toggle";
 
 import { api } from "@/trpc/server";
 

@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { HiSparkles } from "react-icons/hi2";
 import { SiGithub, SiGooglecolab } from "react-icons/si";
+
+import { Button } from "@/components/ui/button";
 
 export default function Acknowledges() {
   return (
