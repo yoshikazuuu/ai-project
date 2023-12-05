@@ -28,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
@@ -43,7 +43,7 @@ export default function RootLayout({
         >
           <TRPCReactProvider cookies={cookies().toString()}>
             <SiteHeader />
-            <div className="layout">{children}</div>
+            {children}
             <Toaster />
           </TRPCReactProvider>
         </ThemeProvider>

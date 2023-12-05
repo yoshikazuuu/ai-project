@@ -61,4 +61,8 @@
     max-width: 68rem;
     @apply mx-auto w-11/12;
   }
+
+  .balance {
+    text-wrap: balance;
+  }
 }

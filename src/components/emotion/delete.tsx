@@ -27,7 +27,7 @@ export function DeleteDialog() {
     onSuccess: () => {
       router.refresh();
       toast({
-        title: "Success",
+        title: "✅ Success",
         description: "Semua query telah dihapus!",
       });
     },

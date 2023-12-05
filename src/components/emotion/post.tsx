@@ -22,6 +22,7 @@ import { Switch } from "@/components/ui/switch";
 import { api } from "@/trpc/react";
 
 import { toast } from "../ui/use-toast";
+import { DeleteDialog } from "./delete";
 
 const formSchema = z.object({
   sentence: z.string().min(1, { message: "Sentence is required" }),
@@ -33,15 +34,17 @@ export function SubmitForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      sentence: "",
       trained: true,
     },
   });
 
   const createPost = api.post.create.useMutation({
     onSuccess: () => {
+      form.setValue("sentence", "");
       router.refresh();
       toast({
-        title: "Success",
+        title: "✅ Success",
         description: "Kalimat telah selesai dicek!",
       });
     },
@@ -91,6 +94,7 @@ export function SubmitForm() {
               <FaPaperPlane />
             )}
           </Button>
+          <DeleteDialog />
         </div>
         <FormField
           control={form.control}

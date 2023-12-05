@@ -16,13 +16,9 @@ const sentimentMap = {
 
 export default async function Twitter() {
   return (
-    <div className="flex flex-col justify-center gap-4 py-10">
+    <div className="layout flex flex-col justify-center gap-4 py-10">
       <div className="text-center text-2xl font-bold">
         Sentence Emotion Checker
-      </div>
-      <div className="flex justify-center gap-2">
-        <DeleteDialog />
-        <ModeToggle />
       </div>
       <SubmitForm />
       <AllData />
