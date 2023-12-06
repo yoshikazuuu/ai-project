@@ -26,7 +26,11 @@ export const postRouter = createTRPCRouter({
             "Content-Type": "application/x-www-form-urlencoded",
           },
           body: `text=${encodeURIComponent(input.sentence)}&trained=${encodeURIComponent(input.trained)}`,
-        });
+        }).catch((error) => {
+          console.error(error);
+          throw new Error("Error connecting to Bert API");
+        })
+
 
         const data = (await response.json()) as BertResponse;
 

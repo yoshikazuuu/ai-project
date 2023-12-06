@@ -51,9 +51,12 @@ function TweetCard({ post }: { post: Post }) {
   return (
     <div
       key={post.id}
-      className="flex w-full flex-col gap-4 rounded-md border bg-slate-100 p-4 shadow-md dark:bg-slate-900"
+      className="flex w-full flex-col gap-2 rounded-md border bg-slate-100 p-4 shadow-md dark:bg-slate-900"
     >
       <p>{sentence}</p>
+      <p className="mt-2 text-right text-sm italic text-muted-foreground">
+        {post.createdAt.toUTCString()}
+      </p>
       <div className="flex items-center justify-between gap-2">
         <p
           className="w-24 rounded-md border px-2 py-1 text-center text-sm font-bold uppercase text-background"

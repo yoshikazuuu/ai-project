@@ -15,7 +15,7 @@ const members = [
     avatarFallback: "H",
     name: "Muhammad Haekal Aditya Rahmadyan",
     description: "2602192071 - muhammad.rahmadyan@binus.ac.id",
-    quote: "I'm gay",
+    quote: "We need to do our best, and God will handle the rest.",
   },
   {
     avatarSrc: "/ezra.webp",

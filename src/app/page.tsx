@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import {useState } from "react";
+import { useState } from "react";
 import { FaArrowDown } from "react-icons/fa";
 import { HiSparkles } from "react-icons/hi2";
 
@@ -107,8 +107,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="dataset" className="h-full w-full">
-          <div className="flex h-[60vh] flex-col items-center justify-center gap-4">
+        <section id="dataset" className="mb-20 h-full w-full">
+          <div className="flex h-[80vh] flex-col items-center justify-center gap-4">
             <h1 className="text-5xl font-bold tracking-tight">
               📊 <Accent>Data Training yang Solid</Accent>
             </h1>
@@ -139,8 +139,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="dataset" className="h-full w-full">
-          <div className="mt-20  flex h-fit flex-col items-center justify-center gap-4">
+        <section id="dataset" className="my-20 h-full w-full">
+          <div className="flex h-fit flex-col items-center justify-center gap-4">
             <h1 className="text-5xl font-bold tracking-tight">
               🔄 <Accent>Proses Training yang Teliti</Accent>
             </h1>
@@ -190,7 +190,7 @@ export default function Home() {
         </section>
 
         <section id="start" className="h-full w-full">
-          <div className="flex h-[60vh] flex-col items-center justify-center gap-4">
+          <div className="flex h-[80vh] flex-col items-center justify-center gap-4">
             <h1 className="text-5xl font-bold tracking-tight">
               🚀 <Accent>Mari kita coba!</Accent>
             </h1>
