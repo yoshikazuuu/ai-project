@@ -43,4 +43,3 @@ yarn-error.log*
 
 .venv
 __pycache__
-emot_fine_tuned.pth
